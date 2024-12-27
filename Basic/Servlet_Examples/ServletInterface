@@ -14,7 +14,7 @@ import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 
-public class Contact implements Servlet {
+public class ServletInterfaceExample implements Servlet {
 
     ServletConfig conf;
 
