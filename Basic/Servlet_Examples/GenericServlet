@@ -1,0 +1,26 @@
+// 2. Using the GenericServlet Abstract Class (Simplified servlet).
+/**
+ * This example shows a Servlet extending an abstract class `GenericServlet`.
+ * `GenericServlet` simplifies servlet development by providing default implementations 
+ * for methods like `init()` and `destroy()`. You only need to override the `service()` 
+ * method to handle requests and generate responses, making it easier than implementing 
+ * the full `Servlet` interface.
+ */
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import java.io.PrintWriter;
+import jakarta.servlet.GenericServlet;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+
+public class About extends GenericServlet {
+
+    @Override
+    public void service(ServletRequest req, ServletResponse resp) throws ServletException, IOException {
+        System.out.println("Service has started: Handling requests...");
+        PrintWriter writer = resp.getWriter();
+        writer.println("<h1>Welcome to My GenericServlet!</h1>");
+        writer.print("<p>This message is generated dynamically by the GenericServlet, indicating that the server is successfully processing your request.</p>");
+    }
+}
