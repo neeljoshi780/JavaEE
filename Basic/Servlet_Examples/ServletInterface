@@ -1,0 +1,51 @@
+// 1. Using the Servlet Interface (Direct implementation).
+/**
+ * A simple example of a Servlet implementing the Servlet interface directly.
+ * It handles HTTP requests and responses by overriding necessary methods.
+ * such as init(), service(), getServletConfig(), getServletInfo(), and destroy().
+ * In this case, the service() method processes the request and generates an HTML response.
+*/
+
+import java.io.IOException;
+import jakarta.servlet.ServletException;
+import java.io.PrintWriter;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+
+public class Contact implements Servlet {
+
+    ServletConfig conf;
+
+    // Life Cycle Methods
+    @Override
+    public void init(ServletConfig conf) {
+        this.conf = conf;
+        System.out.println("Servlet Initialization: Configuring the servlet and preparing resources...");
+    }
+
+    @Override
+    public void service(ServletRequest req, ServletResponse resp) throws ServletException, IOException {
+        System.out.println("Service has started: Handling requests...");
+        PrintWriter writer = resp.getWriter();
+        writer.println("<h1>Welcome to the Servlet Interface!</h1>");
+        writer.print("<p>This message is generated dynamically by the servlet, indicating that the server is successfully processing your request.</p>");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("Servlet is being destroyed: Cleaning up resources and releasing any allocated resources...");
+    }
+
+    // Non Life Cycle Methods
+    @Override
+    public ServletConfig getServletConfig() {
+        return this.conf;
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "This servlet was developed by Neel Joshi.";
+    }
+}
