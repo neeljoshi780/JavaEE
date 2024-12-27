@@ -1,4 +1,5 @@
 // 3. Using the HttpServlet Class (For HTTP-specific servlets).
+// `HttpServlet` simplifies HTTP request handling by overriding doGet() and doPost(), unlike `GenericServlet` or `Servlet` which require more manual setup.
 /**
  * This example shows a Servlet extending the abstract class `HttpServlet`.
  * It handles HTTP requests by overriding the doGet() and doPost() methods.
