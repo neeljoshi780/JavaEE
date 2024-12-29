@@ -1,0 +1,67 @@
+// A cookie is a small piece of data stored on the user's device by the web browser.
+// It is used to remember information such as user preferences, login status, or tracking data across sessions.
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class Register extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter pw = response.getWriter();
+        String user_name = request.getParameter("user_name");
+        pw.println("<h1>Hello " + user_name + " WellCome to my Website...</h1>");
+
+        pw.println("<h2><a href='Success'>Go to Success Servlet</a></h2>");
+
+        //Create a Cookie
+        Cookie c = new Cookie("user_name", user_name);
+        response.addCookie(c);
+    }
+
+}
+
+
+// Access the Cookie.
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class Success extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter pw = response.getWriter();
+
+        Cookie cookies[] = request.getCookies();
+        String user_name = "";
+        boolean temp = false;
+
+        if (cookies == null) {
+            pw.println("<h1>You are new user go to home page and submit your name<h1>");
+        } else {
+            for (Cookie c : cookies) {
+                String name = c.getName();
+                if (name.equals("user_name")) {
+                    user_name = c.getValue();
+                    temp = true;
+                }
+            }
+        }
+        if (temp) {
+            pw.println("<h1>Hello, " + user_name + " WellCome back to my Website...</h1>");
+        } else {
+            pw.println("<h1>You are new user go to home page and submit your name</h1>");
+        }
+    }
+}
