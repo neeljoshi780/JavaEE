@@ -24,3 +24,24 @@ public class Register extends HttpServlet {
         rd.forward(request, response);
     }
 }
+
+
+// Success Servlet Access the Value of setAttribute.
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class Success extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter writer = response.getWriter();
+        String name = request.getParameter("user_name");
+        String extraField = (String) request.getAttribute("extraField");
+        writer.println("<h1>You Have Successfull Register " + name + "</h1>");
+        writer.println("<h2>" + extraField + "</h2>");
+    }
+}
