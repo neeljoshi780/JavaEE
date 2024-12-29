@@ -55,6 +55,7 @@ public class Success extends HttpServlet {
                 if (name.equals("user_name")) {
                     user_name = c.getValue();
                     temp = true;
+                    break;
                 }
             }
         }
