@@ -1,0 +1,33 @@
+// RequestDispatcher is used to forward a request to another servlet or resource, or include content from another resource in the current response.
+
+import jakarta.servlet.RequestDispatcher;
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class Register extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter writer = response.getWriter();
+        writer.println("<h1>Wellcome to Register Servlet</h1>");
+
+        String user_name = request.getParameter("user_name");
+        String user_email = request.getParameter("user_email");
+        String user_password = request.getParameter("user_password");
+
+        RequestDispatcher rd = request.getRequestDispatcher("/Success");
+        rd.forward(request, response);
+    }
+}
+
+// Explanation:
+// 1.Forwarding a Request: After processing a request in one servlet, you can forward the request to another servlet, JSP, or HTML page for further processing or rendering.
+RequestDispatcher dispatcher = request.getRequestDispatcher("/nextServlet");
+dispatcher.forward(request, response);
+
+// 2.Including Content from Another Resource: If you want to embed content from another servlet or JSP in your current response, you can use the include() method.
+RequestDispatcher dispatcher = request.getRequestDispatcher("/anotherPage.jsp");
+dispatcher.include(request, response);
