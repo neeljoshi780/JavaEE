@@ -1,0 +1,26 @@
+// Sets an attribute in the request object to pass data between servlets or JSPs within the same request-response cycle.
+
+import jakarta.servlet.RequestDispatcher;
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class Register extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter writer = response.getWriter();
+        writer.println("<h1>Wellcome to Register Servlet</h1>");
+
+        String user_name = request.getParameter("user_name");
+        String user_email = request.getParameter("user_email");
+        String user_password = request.getParameter("user_password");
+        String extraField = "WellCome";
+
+        request.setAttribute("extraField", extraField);
+        RequestDispatcher rd = request.getRequestDispatcher("/Success");
+        rd.forward(request, response);
+    }
+}
